@@ -35,8 +35,8 @@ testexpect 0 "mdrill CNAME cname.spf-tools.ml @dawn.ns.cloudflare.com." <<EOF
 cname.spf-tools.ml.	300	IN	CNAME	both.spf-tools.ml.
 EOF
 
-testexpect 0 findns orig.spf-tools.ml <<EOF
-dawn.ns.cloudflare.com.
+testexpect 0 findns one.spf-tools.ml <<EOF
+ns1.he.net.
 EOF
 
 testexpect -n 1 findns orig.non-existent.nonnon
