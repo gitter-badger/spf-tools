@@ -2,7 +2,7 @@ DNS_TIMEOUT=${DNS_TIMEOUT:-"2"}
 
 mdrill() {
   TYPE=${1}
-  timeout $DNS_TIMEOUT drill "$@" | sed -n "/^[^;]/{/$TYPE/p}" \
+  mytimeo $DNS_TIMEOUT drill "$@" | sed -n "/^[^;]/{/$TYPE/p}" \
       || { echo "DNS lookup error!" >&2; cleanup; false; }
 }
 
