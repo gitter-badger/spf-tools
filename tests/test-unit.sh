@@ -1,7 +1,8 @@
 a="/$0"; a=${a%/*}; a=${a#/}; a=${a:-.}; BINDIR=$(cd $a; pwd)
 tmp=$(mktemp /tmp/spf-test-unit-XXXXXXXXX)
 trap "rm $tmp*" EXIT
-. $BINDIR/../include/despf.inc.sh
+export PATH=$BINDIR/../include:$PATH
+. despf.inc.sh
 export LC_ALL=C
 export LANG=C
 
