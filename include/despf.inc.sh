@@ -25,11 +25,13 @@ findns() {
   dd="$1"; ns=""; dig=${2:-"mdrills"}
   while test -z "$ns"
   do
-    ns=$($dig NS $dd | sed 1q)
-    echo $dd | grep -q '\.' && dd="${dd#*.}" || {
-      unset ns
+    if
+      ns=$($dig NS $dd)
+    then
       break 1
-    }
+    else
+      echo $dd | grep -q '\.' && dd="${dd#*.}" || break 1
+    fi
   done
   echo "$ns" | grep .
 }
@@ -80,8 +82,11 @@ demx() {
 parsepf() {
   host=$1
   myns=$(findns $host)
-  mdrills TXT $host @$myns | sed 's/^"//;s/"$//;s/" "//' \
-    | grep -E '^v=spf1\s+' | grep .
+  for ns in $myns
+  do
+    mdrills TXT $host @$ns | sed 's/^"//;s/"$//;s/" "//' \
+      | grep -E '^v=spf1\s+' && break
+  done
 }
 
 # getem <includes>
