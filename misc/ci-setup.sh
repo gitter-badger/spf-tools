@@ -10,7 +10,7 @@ ln -nsf $HOME/cache/bin $HOME/bin
 ln -nsf $(which busybox) $HOME/bin/ash
 
 which bc || sudo apt-get install bc -qq || true
-which dig || sudo apt-get install dnsutils -qq || true
+which drill || sudo apt-get install ldns -qq || true
 
 clab() {
   NAME=$1
